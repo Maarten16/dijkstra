@@ -1,0 +1,8 @@
+4;Amsterdam;Rotterdam;Eindhoven;Utrecht
+node1;node2;weight
+a;b;4
+b;c;5
+a;c;3
+a;d;10
+b;d;8
+c;d;2
