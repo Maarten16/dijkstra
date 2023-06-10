@@ -47,29 +47,15 @@ bool Graph::readGraph(std::string filename) {
         end_station.push_back(content[i][1]);
         weight.push_back(content[i][2]);
     }
-    for(auto i:station_names)
-    {
-        cout << i << " ";
-    }
-    cout << endl;
 
-    for(auto i:start_station)
-    {
-        cout << i << " ";
+    // create nodes and edges
+    for (int i = 0; i < station_names.size(); i++) {
+        Node* node = new Node();
+        node->name = station_names[i];
+        nodes.push_back(node);
     }
-    cout << endl;
 
-    for(auto i:end_station)
-    {
-        cout << i << " ";
-    }
-    cout << endl;
-
-    for(auto i:weight)
-    {
-        cout << i << " ";
-    }
-    cout << endl;
+    cout << 9;
 
 
 }
