@@ -1,4 +1,5 @@
 #include "include/Graph.hpp"
+#include "include/Edge.hpp"
 #include <fstream>
 #include <sstream>
 using namespace std;
@@ -10,6 +11,7 @@ bool Graph::readGraph(std::string filename) {
     vector <string> station_names, start_station, end_station, weight;
     vector<string> row;
     string line, word;
+    int indexStart, indexEnd, number_of_nodes;
 
     // Read content of file
 
@@ -34,7 +36,7 @@ bool Graph::readGraph(std::string filename) {
 
     // distribute content of file into variables
 
-    string number_of_nodes = content[0][0];
+    number_of_nodes = stoi(content[0][0]);
 
     for(int i=1;i<content[0].size();i++)
     {
@@ -48,11 +50,21 @@ bool Graph::readGraph(std::string filename) {
         weight.push_back(content[i][2]);
     }
 
-    // create nodes and edges
-    for (int i = 0; i < station_names.size(); i++) {
+    // create nodes
+    for (int i = 0; i < number_of_nodes; i++) {
         Node* node = new Node();
         node->name = station_names[i];
         nodes.push_back(node);
+    }
+
+    // create edges and connect nodes
+    for(int i = 0; i < start_station.size(); i++) {
+        indexStart = start_station[i][0] - 'A';
+        indexEnd = end_station[i][0] - 'A';
+        Edge* edge = new Edge(nodes[indexEnd], stoi(weight[i]));
+        Edge* edge2 = new Edge(nodes[indexStart], stoi(weight[i]));
+        nodes[indexStart]->edges.push_back(edge);
+        nodes[indexEnd]->edges.push_back(edge2);
     }
 
     cout << 9;
